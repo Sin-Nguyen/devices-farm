@@ -1,0 +1,31 @@
+{
+ "server": {
+   "address": "127.0.0.1",
+   "allow-cors": true,
+   "base-path": "/wd/hub",
+   "debug-log-spacing": true,
+   "keep-alive-timeout": 600,
+   "local-timezone": true,
+   "log": "/tmp/appium.log",
+   "log-level": "info",
+   "log-no-colors": false,
+   "log-timestamp": true,
+   "long-stacktrace": false,
+   "no-perms-check": false,
+   "port": 4725,
+   "relaxed-security": true,
+   "session-override": false,
+   "strict-caps": true,
+   "tmp": "/tmp",
+   "trace-dir": "/tmp/appium-instruments",
+   "use-drivers": ["xcuitest"],
+   "use-plugins": ["device-farm", "appium-dashboard"],
+   "plugin": {
+    "device-farm": {
+      "platform": "android",
+      "deviceTypes": "both",
+      "skipChromeDownload": true
+    }
+  }
+ }
+}
