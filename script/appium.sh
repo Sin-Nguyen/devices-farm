@@ -65,8 +65,9 @@ start() {
   echo "Appium config is: $(jq . $PATH_APPIUM_CONFIG)"
   echo ""
   echo "Please wait a bit for appium to start..."
+  address=$(ipconfig getifaddr en0)
   # run appium with specific PORT
-  cmd="$APPIUM_PATH --port $PORT --config $PATH_APPIUM_CONFIG"
+  cmd="$APPIUM_PATH --address $address --port $PORT --config $PATH_APPIUM_CONFIG"
   osascript <<EOF
       tell application "Terminal" to do script "${cmd}"
 EOF

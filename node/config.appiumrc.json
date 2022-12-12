@@ -1,6 +1,5 @@
 {
  "server": {
-  "address": "127.0.0.1",
   "allow-cors": true,
   "base-path": "/wd/hub",
   "debug-log-spacing": true,
