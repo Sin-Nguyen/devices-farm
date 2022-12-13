@@ -3,7 +3,6 @@ PORT=""
 APPIUM_PATH=$(which appium)
 PATH_APPIUM_CONFIG="$(pwd)/node/config.appiumrc.json"
 
-
 ################################################################################
 # assign PORT value in variable when trigger                                   #
 # with -k | --kill-PORT or --start | --start-appium                            #
@@ -58,7 +57,7 @@ start() {
   fi
   echo "Starting appium on port $PORT"
   # show appium config
-  echo "Appium config is: $(jq . $PATH_APPIUM_CONFIG)"
+  echo "Appium config is: $(cat $PATH_APPIUM_CONFIG | json_pp)"
   echo ""
   echo "Please wait a bit for appium to start..."
   address=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')
@@ -67,6 +66,9 @@ start() {
   osascript <<EOF
       tell application "Terminal" to do script "${cmd}"
 EOF
+  sleep 15
+  echo ""
+  echo "Appium is running on port $PORT"
 }
 
 ################################################################################
