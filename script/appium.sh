@@ -3,10 +3,6 @@ PORT=""
 APPIUM_PATH=$(which appium)
 PATH_APPIUM_CONFIG="$(pwd)/node/config.appiumrc.json"
 
-# install jq
-if ! [ -x "$(command -v jq)" ]; then
-  brew install jq
-fi
 
 ################################################################################
 # assign PORT value in variable when trigger                                   #
