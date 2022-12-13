@@ -27,7 +27,7 @@
   "plugin": {
    "device-farm": {
     "platform": "both",
-    "deviceTypes": "real",
+    "deviceTypes": "both",
     "skipChromeDownload": true
    }
   }

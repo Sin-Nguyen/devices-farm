@@ -1,4 +1,5 @@
 #!/bin/sh
+address=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')
 
 if ! [ -x "$(command -v jq)" ]; then
     brew install jq curl
@@ -37,7 +38,7 @@ device_uuid=$4 #for get_device_info
 # get list devices                                                             #
 ################################################################################
 get_list_devices() {
-    list_device=$(curl -s --request GET "http://localhost:$specific_port/device-farm/api/devices")
+    list_device=$(curl -s --request GET "http://$address:$specific_port/device-farm/api/devices")
     if [ ! $? -eq 0 ]; then
         echo "Error: Can't get list devices. Please check port is running or not"
         exit 1
@@ -50,7 +51,7 @@ get_list_devices() {
 # get device info                                                              #
 ################################################################################
 get_device_info() {
-    deviceReadyList=$(curl -s --request GET "http://localhost:$specific_port/device-farm/api/devices" )
+    deviceReadyList=$(curl -s --request GET "http://$address:$specific_port/device-farm/api/devices" )
     if [ ! $? -eq 0 ]; then
         echo "Error: Can't get device info. Please check port is running or not"
         exit 1
@@ -62,7 +63,7 @@ get_device_info() {
 # get list devices ready                                                       #
 ################################################################################
 get_device_ready() {
-    deviceList=$(curl -s --request GET "http://localhost:$specific_port/device-farm/api/devices")
+    deviceList=$(curl -s --request GET "http://$address:$specific_port/device-farm/api/devices")
     if [ ! $? -eq 0 ]; then
         echo "Error: Can't get list devices ready. Please check port is running or not"
         exit 1

@@ -2,6 +2,7 @@
 specific_port=$2
 starting_port=4724
 ending_port=4730
+address=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')
 
 # install jq
 if ! [ -x "$(command -v jq)" ]; then
