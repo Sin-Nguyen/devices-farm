@@ -1,0 +1,16 @@
+{
+ "name": "device-farm-server",
+ "version": "0.0.1",
+ "description": "",
+ "main": "./server/index.js",
+ "scripts": {
+  "start": "kill -9 `lsof -t -i:4722` & node ./server/index.js"
+ },
+ "keywords": [],
+ "author": "",
+ "license": "ISC",
+ "dependencies": {
+  "express": "^4.18.2",
+  "watch": "^1.0.2"
+ }
+}

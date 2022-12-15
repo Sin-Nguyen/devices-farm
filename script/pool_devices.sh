@@ -40,7 +40,7 @@ get_list_devices() {
         echo "Error: Can't get list devices. Please check port is running or not"
         exit 1
     fi
-    echo $list_device | jq 'map({(.udid): .})| add'
+    echo $list_device 
 
 }
 
@@ -65,7 +65,7 @@ get_device_ready() {
         echo "Error: Can't get list devices ready. Please check port is running or not"
         exit 1
     fi
-    echo $deviceList | jq -r '.[] | select(.busy == false)'
+    echo $deviceList | jq -r '.[] | select(.busy == false)' | jq -s
 }
 
 while [[ "$#" -gt 0 ]]; do
