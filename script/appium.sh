@@ -62,7 +62,7 @@ start() {
   echo "Please wait a bit for appium to start..."
   address=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')
   # run appium with specific PORT
-  cmd="$APPIUM_PATH --address $address --port $PORT --config $PATH_APPIUM_CONFIG"
+  cmd="$APPIUM_PATH --address $address --port $PORT --relaxed-security --config $PATH_APPIUM_CONFIG"
   osascript <<EOF
       tell application "Terminal" to do script "${cmd}"
 EOF

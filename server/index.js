@@ -10,7 +10,10 @@ app.listen(4722, () => {
 
 app.get('/', (req, res, next) => {
 	res.format({
-		'text/plain': () => res.send('Welcome to Appium Farm Server'),
+		'text/plain': () =>
+			res.send(
+				'Welcome to Appium Farm Server. Prefer to read this How to use =>  https://leap-expert.atlassian.net/l/cp/bZrCzb3j',
+			),
 	})
 })
 
@@ -78,15 +81,8 @@ app.post('/' + 'appium/:port/start', (req, res) => {
 			const rawRes = stdout.match(/(.*running.*)/g)[0]
 			const appiumConfigJson = require('../node/config.appiumrc.json')
 			delete appiumConfigJson.server['debug-log-spacing']
-			delete appiumConfigJson.server['log']
-			delete appiumConfigJson.server['log-level']
-			delete appiumConfigJson.server['log-no-colors']
 			delete appiumConfigJson.server['log-timestamp']
-			delete appiumConfigJson.server['no-perms-check']
 			delete appiumConfigJson.server['long-stacktrace']
-			delete appiumConfigJson.server['tmp']
-			delete appiumConfigJson.server['trace-dir']
-			delete appiumConfigJson.server['strict-caps']
 			const response = resAppiumObject(appiumConfigJson.server, rawRes)
 			res.format({ 'appliation/json': () => res.send(response) })
 		}

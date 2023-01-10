@@ -3,33 +3,17 @@
   "allow-cors": true,
   "base-path": "/wd/hub",
   "debug-log-spacing": true,
-  "keep-alive-timeout": 600,
+  "keep-alive-timeout": 30000,
   "local-timezone": true,
-  "log": "/tmp/appium.log",
-  "log-level": "info",
-  "log-no-colors": false,
   "log-timestamp": true,
   "long-stacktrace": true,
-  "no-perms-check": false,
   "relaxed-security": true,
-  "session-override": false,
-  "strict-caps": true,
-  "tmp": "/tmp",
-  "trace-dir": "/tmp/appium-instruments",
+  "session-override": true,
   "use-drivers": [
    "uiautomator2",
    "xcuitest"
   ],
-  "use-plugins": [
-   "device-farm",
-   "appium-dashboard"
-  ],
-  "plugin": {
-   "device-farm": {
-    "platform": "both",
-    "deviceTypes": "both",
-    "skipChromeDownload": true
-   }
-  }
+  "use-plugins": [],
+  "plugin": {}
  }
 }
