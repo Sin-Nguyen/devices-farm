@@ -30,8 +30,8 @@ const resAppiumObject = (appiumConfigJson, portServerMessage, port) => {
 		message: {
 			portServerRunning: portServerMessage,
 			serverInfo: appiumConfigJson,
-			deviceFarmURL: `http://172.16.16.88:${port}/device-farm/`,
-			sessionURL: `http://172.16.16.88:${port}/dashboard/`,
+			deviceFarmURL: `http://:${port}/device-farm/`,
+			sessionURL: `http://:${port}/dashboard/`,
 		},
 	}
 }
@@ -98,7 +98,7 @@ app.post('/' + 'appium/:port/start', (req, res) => {
 
 			var config = {
 				method: 'post',
-				url: 'https://hooks.slack.com/services/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',
+				url: '',
 				headers: {
 					'Content-type': 'application/json',
 				},
@@ -137,7 +137,7 @@ app.post('/' + 'appium/:port/kill', (req, res) => {
 
 			var config = {
 				method: 'post',
-				url: 'https://hooks.slack.com/services/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',
+				url: '',
 				headers: {
 					'Content-type': 'application/json',
 				},
