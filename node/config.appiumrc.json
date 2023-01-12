@@ -13,7 +13,17 @@
    "uiautomator2",
    "xcuitest"
   ],
-  "use-plugins": [],
-  "plugin": {}
+  "use-plugins": [
+   "device-farm",
+   "appium-dashboard"
+  ],
+  "plugin": {
+   "device-farm": {
+    "platform": "android",
+    "deviceTypes": "both",
+    "skipChromeDownload": true,
+    "maxSessions": 1
+   }
+  }
  }
 }

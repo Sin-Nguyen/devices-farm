@@ -1,6 +1,8 @@
 var express = require('express')
 var app = express()
 const { exec } = require('child_process')
+var axios = require('axios')
+
 const deviceFarmPort = 4722
 
 app.listen(4722, () => {
@@ -23,11 +25,13 @@ const resObject = (resRaw) => {
 	}
 }
 
-const resAppiumObject = (appiumConfigJson, portServerMessage) => {
+const resAppiumObject = (appiumConfigJson, portServerMessage, port) => {
 	return {
 		message: {
 			portServerRunning: portServerMessage,
 			serverInfo: appiumConfigJson,
+			deviceFarmURL: `http://:${port}/device-farm/`,
+			sessionURL: `http://:${port}/dashboard/`,
 		},
 	}
 }
@@ -83,10 +87,32 @@ app.post('/' + 'appium/:port/start', (req, res) => {
 			delete appiumConfigJson.server['debug-log-spacing']
 			delete appiumConfigJson.server['log-timestamp']
 			delete appiumConfigJson.server['long-stacktrace']
-			const response = resAppiumObject(appiumConfigJson.server, rawRes)
+			const response = resAppiumObject(appiumConfigJson.server, rawRes, port)
 			res.format({ 'appliation/json': () => res.send(response) })
 		}
 
+		if (stdout.includes('Appium is running on port')) {
+			const messsage = {
+				text: `Appium is Up :white_check_mark:\nPort: ${port}\nList device: http://172.16.16.88:${port}/device-farm/\nSession: http://172.16.16.88:${port}/dashboard/`,
+			}
+
+			var config = {
+				method: 'post',
+				url: '',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				data: messsage,
+			}
+
+			axios(config)
+				.then(function (response) {
+					console.log(JSON.stringify(response.data))
+				})
+				.catch(function (error) {
+					console.log(error)
+				})
+		}
 		if (stdout.includes('Error')) {
 			res.format({
 				'appliation/json': () => res.send(resObject(stdout)),
@@ -105,6 +131,26 @@ app.post('/' + 'appium/:port/kill', (req, res) => {
 		if (stdout.includes('killed')) {
 			const rawRes = stdout.match(/(.*killed.*)/g)[0]
 			res.format({ 'appliation/json': () => res.send(resObject(rawRes)) })
+			const messsage = {
+				text: `Appium is killed on ${port} :x:`,
+			}
+
+			var config = {
+				method: 'post',
+				url: '',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				data: messsage,
+			}
+
+			axios(config)
+				.then(function (response) {
+					console.log(JSON.stringify(response.data))
+				})
+				.catch(function (error) {
+					console.log(error)
+				})
 		}
 
 		if (stdout.includes('Error')) {
